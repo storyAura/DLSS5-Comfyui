@@ -1,0 +1,2 @@
+# torch and numpy ship with ComfyUI.
+# First-run extraction of RTX 30/50 .rar files needs 7-Zip on PATH (or SEVEN_ZIP).

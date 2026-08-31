@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-dlss5"
+description = "ComfyUI node for DLSS5 Feature 18 neural rendering. IMAGE in / IMAGE out, with automatic RTX 30/40/50 runtime selection."
+version = "0.1.0"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/purkatyy/DLSS5-"
+
+[tool.comfy]
+PublisherId = "dlss5"
+DisplayName = "ComfyUI-DLSS5"
+includes = ["example_workflows"]

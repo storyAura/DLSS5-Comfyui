@@ -1,0 +1,11 @@
+_upstream/
+vendor/.cache/
+vendor/**/*.dll
+*.zip
+*.rar
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dlss_run.log
+vendor/dlss_run.log
