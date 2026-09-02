@@ -1,14 +1,20 @@
 {
   "id": "dlss5-image",
   "revision": 0,
-  "last_node_id": 4,
-  "last_link_id": 2,
+  "last_node_id": 7,
+  "last_link_id": 4,
   "nodes": [
     {
       "id": 4,
       "type": "MarkdownNote",
-      "pos": [40, 80],
-      "size": [360, 420],
+      "pos": [
+        40,
+        80
+      ],
+      "size": [
+        360,
+        420
+      ],
       "flags": {},
       "order": 0,
       "mode": 0,
@@ -28,60 +34,266 @@
     {
       "id": 1,
       "type": "LoadImage",
-      "pos": [440, 80],
-      "size": [320, 320],
+      "pos": [
+        440,
+        80
+      ],
+      "size": [
+        320,
+        320
+      ],
       "flags": {},
       "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
-        {"name": "IMAGE", "type": "IMAGE", "links": [1], "slot_index": 0},
-        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            3
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "slot_index": 1
+        }
       ],
-      "properties": {"Node name for S&R": "LoadImage"},
-      "widgets_values": ["example.png", "image"]
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ]
     },
     {
       "id": 2,
       "type": "DLSS5NeuralRender",
-      "pos": [800, 80],
-      "size": [340, 300],
+      "pos": [
+        800,
+        80
+      ],
+      "size": [
+        340,
+        300
+      ],
       "flags": {},
       "order": 2,
       "mode": 0,
       "inputs": [
-        {"name": "images", "type": "IMAGE", "link": 1}
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1
+        }
       ],
       "outputs": [
-        {"name": "images", "type": "IMAGE", "links": [2], "slot_index": 0}
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            2
+          ],
+          "slot_index": 0
+        }
       ],
-      "properties": {"Node name for S&R": "DLSS5NeuralRender"},
-      "widgets_values": ["默认", 1.0, 1.0, 1.0, "处理", 1.0, "Auto"]
+      "properties": {
+        "Node name for S&R": "DLSS5NeuralRender"
+      },
+      "widgets_values": [
+        "默认",
+        1.0,
+        1.0,
+        1.0,
+        "处理",
+        1.0,
+        "Auto"
+      ]
     },
     {
       "id": 3,
       "type": "SaveImage",
-      "pos": [1180, 80],
-      "size": [320, 270],
+      "pos": [
+        1180,
+        80
+      ],
+      "size": [
+        320,
+        270
+      ],
       "flags": {},
       "order": 3,
       "mode": 0,
       "inputs": [
-        {"name": "images", "type": "IMAGE", "link": 2}
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 2
+        }
       ],
       "outputs": [],
-      "properties": {"Node name for S&R": "SaveImage"},
-      "widgets_values": ["dlss5"]
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "dlss5"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "MarkdownNote",
+      "pos": [
+        40,
+        560
+      ],
+      "size": [
+        360,
+        520
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "DLSS5 Neural Render (Advanced)",
+      "properties": {
+        "Node name for S&R": "MarkdownNote",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "## 中文\n\n- **style**：观感。默认 / 自然 / 电影 / 风格3\n- **intensity**：总强度 0–2，默认 1\n- **local_tone**：本地色调。默认 0.5，范围 0–2。拉低保住原图明暗\n- **local_struct**：本地结构。默认 0.5，范围 0–2。拉低守轮廓，拉高更立体\n- **output_view**：处理=成品；差异×10=改动对比；左右对比=左原右结果\n- **output_mix**：只在「处理」时生效，原图和结果的混合比例，0–1\n- **gpu_gen**：Auto 按显卡选 30/40/50 DLL，也可手选\n- **preset**：0 / 1 / 2 / 3，默认 1。改这项会重建 Feature\n- **skin_struct**：皮肤结构 −1–2，默认 1\n- **use_auto_mask**：自动遮罩，默认关\n- **ui_correction**：UI 校正，默认关\n\nFeature 18 同分辨率下，preset / skin_struct / mask / UI 校正可能几乎没影响。\n\n## English\n\n- **style**: Look — Default / Natural / Cinematic / Style 3\n- **intensity**: Strength 0–2, default 1\n- **local_tone**: Default 0.5, range 0–2. Lower keeps original exposure\n- **local_struct**: Default 0.5, range 0–2. Lower keeps edges\n- **output_view**: Processed / Diff x10 / Left-right compare\n- **output_mix**: Blend amount 0–1, Processed view only\n- **gpu_gen**: Auto-pick RTX 30/40/50 DLL, or set manually\n- **preset**: 0 / 1 / 2 / 3, default 1. Changing this recreates the Feature\n- **skin_struct**: Skin structure −1–2, default 1\n- **use_auto_mask**: Auto mask, off by default\n- **ui_correction**: UI correction, off by default\n\nOn Feature 18 same-res, preset / skin_struct / mask / UI correction may do little.\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 6,
+      "type": "DLSS5NeuralRenderAdvanced",
+      "pos": [
+        800,
+        560
+      ],
+      "size": [
+        340,
+        440
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            4
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "DLSS5 Neural Render (Advanced)",
+      "properties": {
+        "Node name for S&R": "DLSS5NeuralRenderAdvanced"
+      },
+      "widgets_values": [
+        "默认",
+        1.0,
+        0.5,
+        0.5,
+        "处理",
+        1.0,
+        "Auto",
+        "1",
+        1.0,
+        false,
+        false
+      ]
+    },
+    {
+      "id": 7,
+      "type": "SaveImage",
+      "pos": [
+        1180,
+        560
+      ],
+      "size": [
+        320,
+        270
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "dlss5_adv"
+      ]
     }
   ],
   "links": [
-    [1, 1, 0, 2, 0, "IMAGE"],
-    [2, 2, 0, 3, 0, "IMAGE"]
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      1,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      4,
+      6,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ]
   ],
   "groups": [],
   "config": {},
   "extra": {
-    "ds": {"scale": 0.9, "offset": [0, 0]}
+    "ds": {
+      "scale": 0.75,
+      "offset": [
+        0,
+        0
+      ]
+    }
   },
   "version": 0.4
 }

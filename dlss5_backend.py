@@ -98,12 +98,19 @@ def process_images(
     output_view: str,
     output_mix: float,
     gpu_gen: str,
+    preset: int = 1,
+    skin_struct: float = 1.0,
+    use_auto_mask: bool = False,
+    ui_correction: bool = False,
 ) -> torch.Tensor:
     _require_windows()
     if style not in STYLE_CHOICES:
         raise ValueError(f"Unknown style '{style}'")
     if output_view not in OUTVIEW_CHOICES:
         raise ValueError(f"Unknown output_view '{output_view}'")
+    preset_i = int(preset)
+    if preset_i not in (0, 1, 2, 3):
+        raise ValueError(f"Unknown preset '{preset}'")
 
     gen, reason = resolve_gpu_gen(gpu_gen)
     print(f"[DLSS5] using {gen} ({reason})")
@@ -115,11 +122,14 @@ def process_images(
         _vendor_ready.add(gen)
 
     settings = {
-        "preset": 1,
+        "preset": preset_i,
         "style": STYLE_CHOICES[style],
         "intensity": float(intensity),
         "local_tone": float(local_tone),
         "local_struct": float(local_struct),
+        "skin_struct": float(skin_struct),
+        "use_auto_mask": 1 if use_auto_mask else 0,
+        "ui_correction": 1 if ui_correction else 0,
         "output_view": OUTVIEW_CHOICES[output_view],
         "output_mix": float(output_mix),
     }
