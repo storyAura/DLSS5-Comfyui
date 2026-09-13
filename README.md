@@ -11,7 +11,9 @@
 
 ## 安装
 
-Windows + NVIDIA RTX 30 / 40 / 50。需要 [VC++ 2015–2022](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)。解 30/50 的 `.rar` 需要 [7-Zip](https://www.7-zip.org/)。
+Windows + NVIDIA RTX 30 / 40 / 50（含 4090 D）。需要 [VC++ 2015–2022](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)。解 30/50 的 `.rar` 需要 [7-Zip](https://www.7-zip.org/)。
+
+Linux / WSL / 云主机跑不了：节点加载的是 NGX + D3D12 的 Windows DLL，不是 CUDA 算子。4090D 在 Linux 上同样会直接报错。
 
 1. 把本仓库放到 `ComfyUI/custom_nodes/DLSS5-Comfyui`
 2. 重启 ComfyUI

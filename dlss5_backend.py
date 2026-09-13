@@ -46,8 +46,15 @@ _vendor_ready: set[str] = set()
 
 
 def _require_windows() -> None:
-    if sys.platform != "win32":
-        raise RuntimeError("DLSS5 Neural Render only runs on Windows with an NVIDIA RTX GPU.")
+    if sys.platform == "win32":
+        return
+    raise RuntimeError(
+        "DLSS5 Neural Render 只能在 Windows + NVIDIA RTX 上跑，"
+        f"当前 ComfyUI 系统是 {sys.platform}。"
+        "4090/4090D 等显卡没问题；本节点要加载 Windows NGX/D3D12 的 "
+        "dlssnr_host.dll 和 nvngx_dlssnr.dll，Linux/WSL/云主机无法加载。"
+        "请换 Windows 上的 ComfyUI，或从工作流里去掉这个节点。"
+    )
 
 
 def _to_rgba_uint8(frame: np.ndarray) -> np.ndarray:

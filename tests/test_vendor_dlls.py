@@ -24,6 +24,7 @@ def test_name_parsing() -> None:
         "NVIDIA GeForce RTX 3060": "rtx30",
         "GeForce RTX 3080 Ti": "rtx30",
         "NVIDIA GeForce RTX 4090": "rtx40",
+        "NVIDIA GeForce RTX 4090 D": "rtx40",
         "RTX 4070 Laptop GPU": "rtx40",
         "NVIDIA GeForce RTX 5090": "rtx50",
         "GeForce RTX 5070 Ti": "rtx50",
