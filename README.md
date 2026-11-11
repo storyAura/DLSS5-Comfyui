@@ -7,7 +7,7 @@
 | 节点 | 说明 |
 | --- | --- |
 | **DLSS5 Neural Render** | 简易版。强度/本地色调/本地结构 0–1，默认 1 |
-| **DLSS5 Neural Render (Advanced)** | 高级版。`local_tone` / `local_struct` 默认 0.5、上限 2；`intensity` 上限 2；多 `preset` / `skin_struct` / `use_auto_mask` / `ui_correction` |
+| **DLSS5 Neural Render (Advanced)** | 高级版。`local_tone` / `local_struct` 默认 0.5、无上限；`intensity` 无上限；多 `preset` / `skin_struct` / `use_auto_mask` / `ui_correction` |
 
 ## 安装
 
@@ -68,9 +68,9 @@ LoadVideo → GetVideoComponents → DLSS5 Neural Render → CreateVideo
 | --- | --- |
 | `images` | `IMAGE` 张量。视频拆帧按顺序处理；RGBA 的 Alpha 原样传出 |
 | `style` | 默认 / 自然 / 电影 / 风格3 |
-| `intensity` | 总强度。简易 0–1 默认 1；高级 0–2 默认 1 |
-| `local_tone` | 本地色调。拉低保住原图明暗。简易 0–1 默认 1；高级 0–2 默认 0.5 |
-| `local_struct` | 本地结构。拉低守轮廓，拉高更立体。简易 0–1 默认 1；高级 0–2 默认 0.5 |
+| `intensity` | 总强度。简易 0–1 默认 1；高级 0 起无上限，默认 1 |
+| `local_tone` | 本地色调。拉低保住原图明暗。简易 0–1 默认 1；高级 0 起无上限，默认 0.5 |
+| `local_struct` | 本地结构。拉低守轮廓，拉高更立体。简易 0–1 默认 1；高级 0 起无上限，默认 0.5 |
 | `output_view` | 处理=成品；差异×10=改动对比；左右对比=左原右结果 |
 | `output_mix` | 只在「处理」时生效：`原图 + (DLSS − 原图) × mix`，0–1 |
 | `gpu_gen` | Auto / RTX 30 / RTX 40 / RTX 50 |
@@ -80,7 +80,7 @@ LoadVideo → GetVideoComponents → DLSS5 Neural Render → CreateVideo
 | 参数 | 说明 |
 | --- | --- |
 | `preset` | `0` / `1` / `2` / `3`，默认 `1`。改这项会重建 Feature |
-| `skin_struct` | 皮肤结构 −1–2，默认 1 |
+| `skin_struct` | 皮肤结构 −1 起无上限，默认 1 |
 | `use_auto_mask` | 自动遮罩，默认关 |
 | `ui_correction` | UI 校正，默认关 |
 

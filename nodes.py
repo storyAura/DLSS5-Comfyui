@@ -18,6 +18,8 @@ except ImportError:
     io = None
 
 STYLE_LIST = list(STYLE_CHOICES.keys())
+# ComfyUI cannot send float("inf") to the browser (invalid JSON), so use a huge number as "no limit".
+NO_MAX = 1e6
 OUTVIEW_LIST = list(OUTVIEW_CHOICES.keys())
 GPU_GEN_LIST = list(GPU_GEN_LABELS.keys())
 PRESET_LIST = ["0", "1", "2", "3"]
@@ -106,14 +108,14 @@ class DLSS5NeuralRenderAdvanced:
             "required": {
                 "images": ("IMAGE",),
                 "style": (STYLE_LIST, {"default": "默认"}),
-                "intensity": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 2.0, "step": 0.05}),
-                "local_tone": ("FLOAT", {"default": 0.5, "min": 0.0, "max": 2.0, "step": 0.05}),
-                "local_struct": ("FLOAT", {"default": 0.5, "min": 0.0, "max": 2.0, "step": 0.05}),
+                "intensity": ("FLOAT", {"default": 1.0, "min": 0.0, "max": NO_MAX, "step": 0.05}),
+                "local_tone": ("FLOAT", {"default": 0.5, "min": 0.0, "max": NO_MAX, "step": 0.05}),
+                "local_struct": ("FLOAT", {"default": 0.5, "min": 0.0, "max": NO_MAX, "step": 0.05}),
                 "output_view": (OUTVIEW_LIST, {"default": "处理"}),
                 "output_mix": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 1.0, "step": 0.05}),
                 "gpu_gen": (GPU_GEN_LIST, {"default": "Auto"}),
                 "preset": (PRESET_LIST, {"default": "1"}),
-                "skin_struct": ("FLOAT", {"default": 1.0, "min": -1.0, "max": 2.0, "step": 0.05}),
+                "skin_struct": ("FLOAT", {"default": 1.0, "min": -1.0, "max": NO_MAX, "step": 0.05}),
                 "use_auto_mask": ("BOOLEAN", {"default": False}),
                 "ui_correction": ("BOOLEAN", {"default": False}),
             }
@@ -125,7 +127,7 @@ class DLSS5NeuralRenderAdvanced:
     CATEGORY = "image/dlss5"
     DESCRIPTION = (
         "DLSS5 Feature 18 neural render with extra options. "
-        "local_tone / local_struct default 0.5 and go up to 2."
+        "local_tone / local_struct default 0.5, no upper limit."
     )
 
     def process(
@@ -216,14 +218,14 @@ if io is not None:
                 inputs=[
                     io.Image.Input("images"),
                     io.Combo.Input("style", options=STYLE_LIST, default="默认"),
-                    io.Float.Input("intensity", default=1.0, min=0.0, max=2.0, step=0.05),
-                    io.Float.Input("local_tone", default=0.5, min=0.0, max=2.0, step=0.05),
-                    io.Float.Input("local_struct", default=0.5, min=0.0, max=2.0, step=0.05),
+                    io.Float.Input("intensity", default=1.0, min=0.0, max=NO_MAX, step=0.05),
+                    io.Float.Input("local_tone", default=0.5, min=0.0, max=NO_MAX, step=0.05),
+                    io.Float.Input("local_struct", default=0.5, min=0.0, max=NO_MAX, step=0.05),
                     io.Combo.Input("output_view", options=OUTVIEW_LIST, default="处理"),
                     io.Float.Input("output_mix", default=1.0, min=0.0, max=1.0, step=0.05),
                     io.Combo.Input("gpu_gen", options=GPU_GEN_LIST, default="Auto"),
                     io.Combo.Input("preset", options=PRESET_LIST, default="1"),
-                    io.Float.Input("skin_struct", default=1.0, min=-1.0, max=2.0, step=0.05),
+                    io.Float.Input("skin_struct", default=1.0, min=-1.0, max=NO_MAX, step=0.05),
                     io.Boolean.Input("use_auto_mask", default=False),
                     io.Boolean.Input("ui_correction", default=False),
                 ],
